@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="css/lungo.icon.brand.css">
     <link rel="stylesheet" href="css/lungo.icon.css">
     <link rel="stylesheet" href="css/lungo.theme.default.css">
+    <link rel="stylesheet" href="css/game.css">
 </head>
 
 <body class="app">
@@ -55,8 +56,25 @@
                 </div>
             </div>
         </header>
-        <article id="main-article" class="list indented scroll">
-            el juego en si
+
+
+        <article id="game-article" class="list indented scroll">
+            <div class="row nomargins">
+                <div class="ten colums red topLayer">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row nomargins">
+                <div class="two columns green leftLayer">
+                    aaa
+                </div>
+                <div class="six columns" id="game-zone">
+
+                </div>
+                <div class="two columns red rightLayer">
+                    ccc
+                </div>
+
         </article>
     </section>
 
@@ -106,15 +124,24 @@
                     websocket.emit('start', my_data);
                 }
             });
+        });
 
+        websocket.on('play', function(data) {
+            console.error('Ha tocado :: ', data);
         });
 
         websocket.on('start_in_room', function(data) {
             if(data.user == my_data.user) {
+                my_data.class_name = data.class_name;
                 room_data = data.room;
                 Lungo.Router.section('#game');
                 load_instrument(my_data.instrument);
-            }else{}
+            } else {
+                if(room_data.room_id) {
+                    room_data.users.push(data.user);
+                    console.error("Ha entrado alguien a la sala :: ", data.user);
+                }
+            }
         });
 
 
@@ -122,8 +149,6 @@
             switch(what) {
                 default:
                     Instrument.Drum.init();
-                    console.error("called");
-
             }
         };
 

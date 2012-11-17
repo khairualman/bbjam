@@ -9,6 +9,7 @@ var ROOMS = [];
 server.sockets.on("connection", function(action) {
     action.on('start', enter_room);
     action.on('exit_room', exit_room);
+    action.on('play', play);
 });
 
 
@@ -26,6 +27,29 @@ var exit_room = function(data) {
 };
 
 
+
+var _getUserPosition = function(id, name) {
+    var room = ROOMS[id];
+    for(var i in room.users) {
+        if(room.users[i].name == name) {
+            return room.users[i];
+        }
+    }
+    return 1;
+};
+
+
+var play = function(data) {
+    var user = _getUserPosition(data.room_id, data.name);
+    // server.sockets.emit('play', data.user_data);
+    server.sockets.emit('play', {
+        class_name: data.user_data.class_name,
+        sound: data.sound
+    });
+};
+
+
+
 var enter_room = function(data) {
     console.error("ENTRAR :: ", data);
     if(!ROOMS[data.room_id]) {
@@ -35,17 +59,17 @@ var enter_room = function(data) {
         };
     }
     var room = ROOMS[data.room_id];
-    if(room.users.length < 4 ) {
+    if(room.users.length < 4) {
         room.users.push({
             name: data.user,
-            instrument: data.instrument,
-            color: data.color
+            instrument: data.instrument
         });
         server.sockets.emit('start_in_room', {
             room: room,
-            user: data.user
+            user: data.user,
+            class_name: 'player-' + (room.users.length)
         });
-        console.error(room);
+        console.error(room.users);
     } else {
         _error_room_complete();
     }

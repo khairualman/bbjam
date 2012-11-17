@@ -1,34 +1,57 @@
 Instrument.Drum = (function() {
 
-    var sounds = [
-        'chh.ogg',
-        'cow.ogg',
-        'kick.ogg',
-        'ohh.ogg',
-        'ride.ogg',
-        'snare.ogg'
-    ];
-
+    var SOUNDS = [ 'chh', 'cow', 'kick', 'ohh', 'ride', 'snare'];
+    var COUNTERS = [];
+    for(var j in SOUNDS) {
+        COUNTERS[SOUNDS[j]] = 0;
+    }
 
     var _addPadsToBody = function() {
-        var body, sounds, audio_html, j, i;
-        body = $$("body");
-        for(i in sounds) {
-            sound_ogg = sounds[i];
+        var body, audio_html, pad_html, j, i;
+        body = $$("#game-zone");
+        body.html(' ');
+        for(i in SOUNDS) {
+            sound_ogg = SOUNDS[i];
+            pad_html = "";
             for(j = 0; j < 4; j++) {
-                pad_html = '<audio src="drumsamples/' + sound_ogg + '" id="' + sound_ogg + '"></audio>';
-                pad_html += '<div class="drum_pad" id="' + sound_ogg + '">' + sound_ogg + '</div>';
-                body.append(pad_html);
+                body.append('<audio '+
+                    'style="visibility:hidden" '+
+                    'src="drumsamples/' + sound_ogg + '.ogg" '+
+                    'preload="auto" '+
+                    'data-counter="'+j+'" '+
+                    'data-audio="' + sound_ogg + '">'+
+                    '</audio>');
             }
+            body.append('<div class="drum_pad" data-pad="' + sound_ogg + '">' + sound_ogg + '</div>');
         }
     };
 
+    var _bindEvents = function() {
+        var ogg;
+        $$(".drum_pad").each(function() {
+            $$(this).touch(function() {
+                ogg = $$(this).attr("data-pad");
+                _play(ogg);
+            });
+        });
+    };
 
+    var _play = function(ogg) {
+        console.error(my_data);
+        var count = (COUNTERS[ogg]++) % 4;
+        $$("[data-audio="+ogg+"][data-counter='"+count+"']")[0].play();
+        websocket.emit('play', {
+            room_id: room_data.room_id,
+            user_data: my_data,
+            type: 'drum',
+            sound: ogg
+        });
+    };
 
     var init = function() {
         _addPadsToBody();
+        _bindEvents();
     };
-
 
     return {
         init: init
