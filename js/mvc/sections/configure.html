@@ -1,31 +1,30 @@
 <section id="configure" data-transition="slide">
-    <header class="">
+    <header>
         <nav class="left box">
-            <a href="#features" data-router="aside" data-icon="menu"></a>
+            <a href="#back" data-router="section" data-icon="left"></a>
         </nav>
-        <div class="left">
-            <div class="centered title with-subtitle">
-                BBJAM
-                <small class="subtitle">Select your user</small>
-            </div>
+        <div class="centered title with-subtitle">
+            BBJAM
+            <small class="subtitle">Select your user</small>
         </div>
     </header>
 
     <article id="configure-article" class="list indented scroll">
         <form>
-            <input type="text" value="" placeholder="introduce aquí tu nombre" required="true" />
-            <select id="select_instrument" type="checkbox">
+            <input type="text" id="user-name" placeholder="introduce aquí tu nombre" required="true" />
+            <select id="select_instrument">
                 <option value="guitar">Guitar</option>
                 <option value="guitar2">Second guitar</option>
                 <option value="drums">Drums</option>
                 <option value="bass">Bass</option>
             </select>
-            <select id="select_color" type="checkbox">
+            <select id="select_color">
                 <option value="blue">Blue</option>
                 <option value="red">Red</option>
                 <option value="green">Green</option>
                 <option value="yellow">Yellow</option>
             </select>
+            <a href="#" data-action="start" class="button big red">Start</a>
             <a href="#" id="enter-room" class="button big red">Comenzar</a>
         </form>
     </article>

@@ -30,10 +30,10 @@
             </div>
         </header>
 
-        <article id="main-article" class="list indented scroll">
-            <div class="list scroll">
+        <article id="main-article">
+            <div class="selectable list scroll">
                 <ul>
-                    <li>
+                    <li class="anchor">
                         <div class="right blue bubble">
                             <small>Users: 2</small>
                         </div>
@@ -60,6 +60,7 @@
     <!-- Lungo dependencies -->
     <script src="js/libs/quo.js"></script>
     <script src="js/libs/lungo.js"></script>
+    <script src="js/libs/monocle.js"></script>
     <script src="js/libs/socket.io.js"></script>
 
     <!-- Lungo dependencies -->
@@ -75,7 +76,8 @@
         <!-- VIEWS -->
         <!-- // <script src="js/mvc/views/build/daily_glycemia.js"></script> -->
         <!-- CONTROLERS -->
-        <!-- // <script src="js/mvc/controllers/build/login.js"></script> -->
+        <script src="js/mvc/controllers/build/room.js"></script>
+        <script src="js/mvc/controllers/build/configure.js"></script>
 
     <script>
         Lungo.init({
