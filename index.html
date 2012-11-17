@@ -22,66 +22,47 @@
 <body class="app">
 
     <section id="main" data-transition="slide">
-        <header class="">
-            <nav class="left box">
-                <a href="#features" data-router="aside" data-icon="menu"></a>
-            </nav>
+        <header>
             <div class="left">
                 <div class="centered title with-subtitle">
-                    Lungo
-                    <small class="subtitle">HTML5 Cross-Device Framework</small>
+                    BBJAM
+                    <small class="subtitle">Select a room</small>
                 </div>
             </div>
         </header>
 
-        <article id="main-article" class="list indented scroll">
-            <form>
-                <input type="text" value="" placeholder="introduce aquí tu nombre" required="true" />
-                <a href="#" id="enter-room" class="button big red">Comenzar</a>
-            </form>
-        </article>
-    </section>
-
-
-    <section id="game" data-transition="slide">
-
-        <header class="">
-            <nav class="left box">
-                <a href="#" id="exit-room" data-icon="left"></a>
-            </nav>
-            <div class="left">
-                <div class="centered title with-subtitle">
-                    Lungo
-                    <small class="subtitle">HTML5 Cross-Device Framework</small>
-                </div>
+        <article id="main-article">
+            <div class="selectable list scroll">
+                <ul>
+                    <li class="anchor">
+                        <div class="right blue bubble">
+                            <small>Users: 2</small>
+                        </div>
+                        <strong>ROOM 1</strong>
+                    </li>
+                    <li>
+                        <div class="right blue bubble">
+                            <small>Users: 3</small>
+                        </div>
+                        <strong>ROOM 2</strong>
+                    </li>
+                    <li>
+                        <div class="right blue bubble">
+                            <small>Users: 1</small>
+                        </div>
+                        <strong>ROOM 3</strong>
+                    </li>
+                </ul>
             </div>
-        </header>
 
 
-        <article id="game-article" class="list indented scroll">
-            <div class="row nomargins">
-                <div class="ten colums red topLayer">
-                    &nbsp;
-                </div>
-            </div>
-            <div class="row nomargins">
-                <div class="two columns green leftLayer">
-                    aaa
-                </div>
-                <div class="six columns" id="game-zone">
-
-                </div>
-                <div class="two columns red rightLayer">
-                    ccc
-                </div>
-
-        </article>
     </section>
 
 
     <!-- Lungo dependencies -->
     <script src="js/libs/quo.js"></script>
     <script src="js/libs/lungo.js"></script>
+    <script src="js/libs/monocle.js"></script>
     <script src="js/libs/socket.io.js"></script>
 
     <!-- Lungo dependencies -->
@@ -90,6 +71,15 @@
     <script src="js/Instrument.Guitar.js"></script>
     <script src="js/Instrument.Keyboard.js"></script>
     <script src="js/Instrument.Bass.js"></script>
+
+    <script src="js/mvc/build/app.js"></script>
+        <!-- MODELS -->
+        <!-- // <script src="js/mvc/models/build/history.js"></script> -->
+        <!-- VIEWS -->
+        <!-- // <script src="js/mvc/views/build/daily_glycemia.js"></script> -->
+        <!-- CONTROLERS -->
+        <script src="js/mvc/controllers/build/room.js"></script>
+        <script src="js/mvc/controllers/build/configure.js"></script>
 
     <script>
         Lungo.init({
