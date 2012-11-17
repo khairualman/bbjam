@@ -66,10 +66,12 @@
     <script src="js/libs/lungo.js"></script>
     <script src="js/libs/socket.io.js"></script>
 
-    <script src="js/Drum.js"></script>
-    <script src="js/Guitar.js"></script>
-    <script src="js/Keyboard.js"></script>
-    <script src="js/Bass.js"></script>
+    <!-- Lungo dependencies -->
+    <script src="js/Instrument.js"></script>
+    <script src="js/Instrument.Drum.js"></script>
+    <script src="js/Instrument.Guitar.js"></script>
+    <script src="js/Instrument.Keyboard.js"></script>
+    <script src="js/Instrument.Bass.js"></script>
 
     <script>
         Lungo.init({
@@ -80,38 +82,50 @@
 
         var websocket = io.connect("http://192.168.18.118:6969");
         var room_data = {};
-        var my_user = '';
+        var my_data = {};
 
         $$(document).ready(function() {
 
             $$("#exit-room").tap(function() {
                 websocket.emit('exit_room', {
                     room_id: room_data.room_id,
-                    name: my_user
+                    name: my_data.user
                 });
                 Lungo.Router.back();
             });
 
             $$("#enter-room").tap(function() {
-                my_user = $$(this).siblings('input').val();
-                if(my_user != "") {
-                    websocket.emit('start', {
+                my_data.user = $$(this).siblings('input').val();
+                if(my_data.user != "") {
+                    my_data = {
                         room_id: '1',
-                        username: my_user,
+                        user: my_data.user,
                         instrument: 'banjo',
                         color: 'red'
-                    });
+                    };
+                    websocket.emit('start', my_data);
                 }
             });
 
         });
 
         websocket.on('start_in_room', function(data) {
-            if(data.user == my_user) {
+            if(data.user == my_data.user) {
                 room_data = data.room;
                 Lungo.Router.section('#game');
-            }
+                load_instrument(my_data.instrument);
+            }else{}
         });
+
+
+        var load_instrument = function(what) {
+            switch(what) {
+                default:
+                    Instrument.Drum.init();
+                    console.error("called");
+
+            }
+        };
 
     </script>
 

@@ -1,4 +1,4 @@
-Instrument.Drum = function() {
+Instrument.Drum = (function() {
 
     var sounds = [
         'chh.ogg',
@@ -21,7 +21,7 @@ Instrument.Drum = function() {
                 body.append(pad_html);
             }
         }
-    }:
+    };
 
 
 
@@ -34,4 +34,4 @@ Instrument.Drum = function() {
         init: init
     };
 
-};
+})();
