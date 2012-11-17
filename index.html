@@ -106,7 +106,7 @@
                 <div>
                     <br/>
                     <label>Your Name</label>
-                    <input type="text" value="Ina" class="color pulse azul" id="name"/>
+                    <input type="text" value="Inaa" class="color pulse azul" id="name"/>
 
                     <label>Your Instrument</label>
                     <input type="text" value="drums" class="color pulse rojo" />
@@ -121,11 +121,11 @@
 
     <section id="game" data-transition="slide">
         <article id="play">
-            <div class="player instrument " id="game-zone">
-                <div>KICK</div>
-                <div class="jam">RIDE</div>
-                <div>SNARE</div>
-                <div>COW</div>
+            <div class="player instrument" id="game-zone">
+                <div class="drum_pad" data-pad="kick">KICK</div>
+                <div class="drum_pad" data-pad="ride">RIDE</div>
+                <div class="drum_pad" data-pad="snare">SNARE</div>
+                <div class="drum_pad" data-pad="cow">COW</div>
             </div>
             <div class="player one"></div>
             <div class="player two"></div>
@@ -147,15 +147,6 @@
     <script src="js/Instrument.Guitar.js"></script>
     <script src="js/Instrument.Keyboard.js"></script>
     <script src="js/Instrument.Bass.js"></script>
-
-
-        <!-- <script src="js/mvc/build/app.js"></script> -->
-        <!-- MODELS -->
-        <!-- // <script src="js/mvc/models/build/history.js"></script> -->
-        <!-- VIEWS -->
-        <!-- // <script src="js/mvc/views/build/daily_glycemia.js"></script> -->
-        <!-- CONTROLERS -->
-
 
     <script>
         Lungo.init({
@@ -207,12 +198,11 @@
                     var selector = ".player.four";
                     break;
             }
+            Instrument.Drum.play_ogg(data.sound);
             $$(selector).addClass('jam');
             setTimeout(function() {
                 $$(selector).removeClass('jam');
-
-            }, 150);
-            console.error('Ha tocado :: ', data);
+            }, 200);
         });
 
         websocket.on('start_in_room', function(data) {

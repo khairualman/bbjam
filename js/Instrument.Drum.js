@@ -9,7 +9,7 @@ Instrument.Drum = (function() {
     var _addPadsToBody = function() {
         var body, audio_html, pad_html, j, i;
         body = $$("#game-zone");
-        body.html(' ');
+        //body.html(' ');
         for(i in SOUNDS) {
             sound_ogg = SOUNDS[i];
             pad_html = "";
@@ -22,7 +22,6 @@ Instrument.Drum = (function() {
                     'data-audio="' + sound_ogg + '">'+
                     '</audio>');
             }
-            body.append('<div class="drum_pad" data-pad="' + sound_ogg + '">' + sound_ogg + '</div>');
         }
     };
 
@@ -36,10 +35,14 @@ Instrument.Drum = (function() {
         });
     };
 
-    var _play = function(ogg) {
-        console.error(my_data);
+    var play_ogg = function(ogg) {
         var count = (COUNTERS[ogg]++) % 4;
         $$("[data-audio="+ogg+"][data-counter='"+count+"']")[0].play();
+    };
+
+
+    var _play = function(ogg) {
+        //play_ogg(ogg);
         websocket.emit('play', {
             room_id: room_data.room_id,
             user_data: my_data,
@@ -54,7 +57,8 @@ Instrument.Drum = (function() {
     };
 
     return {
-        init: init
+        init: init,
+        play_ogg: play_ogg
     };
 
 })();
