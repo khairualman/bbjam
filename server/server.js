@@ -27,6 +27,7 @@ var exit_room = function(data) {
 
 
 var enter_room = function(data) {
+    console.error("ENTRAR :: ", data);
     if(!ROOMS[data.room_id]) {
         ROOMS[data.room_id] = {
             room_id: data.room_id,
@@ -36,13 +37,13 @@ var enter_room = function(data) {
     var room = ROOMS[data.room_id];
     if(room.users.length < 4 ) {
         room.users.push({
-            name: data.username,
+            name: data.user,
             instrument: data.instrument,
             color: data.color
         });
         server.sockets.emit('start_in_room', {
             room: room,
-            user: data.username
+            user: data.user
         });
         console.error(room);
     } else {
