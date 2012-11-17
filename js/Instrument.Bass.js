@@ -1,0 +1,8 @@
+Instrument.Bass = function() {
+
+
+
+
+
+
+}
