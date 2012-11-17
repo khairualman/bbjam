@@ -26,29 +26,12 @@ var exit_room = function(data) {
     console.error(room);
 };
 
-
-
-var _getUserPosition = function(id, name) {
-    var room = ROOMS[id];
-    for(var i in room.users) {
-        if(room.users[i].name == name) {
-            return room.users[i];
-        }
-    }
-    return 1;
-};
-
-
 var play = function(data) {
-    var user = _getUserPosition(data.room_id, data.name);
-    // server.sockets.emit('play', data.user_data);
     server.sockets.emit('play', {
         class_name: data.user_data.class_name,
         sound: data.sound
     });
 };
-
-
 
 var enter_room = function(data) {
     console.error("ENTRAR :: ", data);
@@ -74,8 +57,6 @@ var enter_room = function(data) {
         _error_room_complete();
     }
 };
-
-
 
 var _error_room_complete = function() {
     console.error("La sala está llena !!");
