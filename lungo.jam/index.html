@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Lungo 2 - HTML5 Cross-Device Framework</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="cleartype" content="on">
+
+    <!-- iPhone -->
+    <link href="http://lungo.tapquo.com/resources/icon-57.png" sizes="57x57" rel="apple-touch-icon">
+    <link href="http://lungo.tapquo.com/resources/startup-image-320x460.png" media="(device-width: 320px) and (device-height: 480px)
+             and (-webkit-device-pixel-ratio: 1)" rel="apple-touch-startup-image">
+
+    <!-- iPhone (Retina) -->
+    <link href="http://lungo.tapquo.com/resources/icon-114.png" sizes="114x114" rel="apple-touch-icon">
+    <link href="http://lungo.tapquo.com/resources/startup-image-640x920.png" media="(device-width: 320px) and (device-height: 480px)
+             and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+
+    <!-- iPhone 5 -->
+    <link href="http://lungo.tapquo.com/resources/startup-image-640x1096.png" media="(device-width: 320px) and (device-height: 568px)
+             and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+
+    <!-- Lungo - Stylesheets -->
+    <link rel="stylesheet" href="components/lungo/lungo.css">
+    <link rel="stylesheet" href="components/lungo/lungo.icon.css">
+    <link rel="stylesheet" href="components/lungo/lungo.icon.brand.css">
+    <link rel="stylesheet" href="components/lungo.theme/css/lungo.theme.game.css">
+
+</head>
+
+<body class="app">
+
+    <section id="login">
+        <article class="splash">
+            <h2 class="color pulse blanco">BLACKBERRY</h2>
+            <span class="color pulse azul">JAM</span>
+            <span class="color pulse rojo">SESSIONS</span>
+            <div class="copyright">by tapquo labs</div>
+
+            <a href="#salas" data-router="section">tap to play</a>
+        </article>
+    </section>
+
+
+
+        <section id="salas" data-transition="slide">
+            <header data-title="JAM SESSIONS"></header>
+
+            <article class="list scroll indented">
+                <ul>
+                    <li>
+                        <a href="#profile" data-router="section">
+                            <div class="right  color rojo ">
+                                0 players
+                            </div>
+                            <strong  class="color pulse rojo">blackberry</strong>
+                            <small>session</small>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#profile" data-router="section">
+                            <div class="right color verde pulse">
+                                4 players
+                            </div>
+                            <strong  class="color pulse verde">METALLICA</strong>
+                            <small>ROCK</small>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#profile" data-router="section">
+                            <div class="right color amarillo pulse ">
+                                128 players
+                            </div>
+                            <strong  class="color pulse amarillo">NOCTURNA</strong>
+                            <small>DUB STEP</small>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#profile" data-router="section">
+                            <div class="right color azul pulse ">
+                                2 players
+                            </div>
+                            <strong  class="color pulse azul">bloc party</strong>
+                            <small>indie</small>
+                        </a>
+                    </li>
+                </ul>
+            </article>
+        </section>
+    <section id='profile' data-transition='slide' >
+        <header data-title='Profile'>
+            <nav>
+                <a href="#back" data-router="section">back</a>
+            </nav>
+        </header>
+
+        <article class="current indented">
+                <div>
+                    <br/>
+                    <label>Your Name</label>
+                    <input type="text" value="Ina" class="color pulse azul" />
+
+                    <label>Your Instrument</label>
+                    <input type="text" value="drums" class="color pulse rojo" />
+
+                    <label>Level</label>
+                    <input type="text" value="EXPERT" class="color pulse verde" />
+
+                    <a href="#game" data-router="section" class="button big white" data-label="LET'S GO"></a>
+                </div>
+        </article>
+    </section>
+
+    <section id="game" data-transition="slide">
+        <article id="play">
+            <div class="player instrument ">
+                <div>KICK</div>
+                <div class="jam">RIDE</div>
+                <div>SNARE</div>
+                <div>COW</div>
+            </div>
+            <div class="player one jam"></div>
+            <div class="player two jam"></div>
+            <div class="player three jam"></div>
+            <div class="player four jam"></div>
+        </article>
+    </section>
+
+    <!-- Lungo - Dependencies -->
+    <script src="components/quojs/quo.js"></script>
+    <script src="components/lungo/lungo.js"></script>
+    <!-- Lungo - Sandbox App -->
+    <script>
+        Lungo.init();
+    </script>
+</body>
+</html>
