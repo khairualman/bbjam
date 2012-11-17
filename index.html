@@ -36,7 +36,7 @@
         <article id="main-article" class="list indented scroll">
             <form>
                 <input type="text" value="" placeholder="introduce aquí tu nombre" required="true" />
-                <a href="#" id="start-button" class="button big red">Comenzar</a>
+                <a href="#" id="enter-room" class="button big red">Comenzar</a>
             </form>
         </article>
     </section>
@@ -46,7 +46,7 @@
 
         <header class="">
             <nav class="left box">
-                <a href="#back" data-router="back" data-icon="left"></a>
+                <a href="#" id="exit-room" data-icon="left"></a>
             </nav>
             <div class="left">
                 <div class="centered title with-subtitle">
@@ -66,9 +66,10 @@
     <script src="js/libs/lungo.js"></script>
     <script src="js/libs/socket.io.js"></script>
 
-    <script src="js/events.js"></script>
-
-
+    <script src="js/Drum.js"></script>
+    <script src="js/Guitar.js"></script>
+    <script src="js/Keyboard.js"></script>
+    <script src="js/Bass.js"></script>
 
     <script>
         Lungo.init({
@@ -83,21 +84,20 @@
 
         $$(document).ready(function() {
 
-            $$("a[data-router=back]").tap(function() {
-                console.error('Voy a salir --> ', room_data);
+            $$("#exit-room").tap(function() {
                 websocket.emit('exit_room', {
                     room_id: room_data.room_id,
                     name: my_user
                 });
+                Lungo.Router.back();
             });
 
-            $$("#start-button").tap(function() {
-                var name = $$(this).siblings('input').val();
-                if(name != "") {
-                    my_user = name;
+            $$("#enter-room").tap(function() {
+                my_user = $$(this).siblings('input').val();
+                if(my_user != "") {
                     websocket.emit('start', {
                         room_id: '1',
-                        username: name,
+                        username: my_user,
                         instrument: 'banjo',
                         color: 'red'
                     });
@@ -107,10 +107,10 @@
         });
 
         websocket.on('start_in_room', function(data) {
-            room_data = data.room;
-            console.error('Dentro del ROOM !!!!!', room_data);
-            Lungo.Router.section('#game');
-
+            if(data.user == my_user) {
+                room_data = data.room;
+                Lungo.Router.section('#game');
+            }
         });
 
     </script>

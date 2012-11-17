@@ -1,6 +1,7 @@
 
 var server = require("socket.io").listen(6969);
 
+
 var ROOMS = [];
 
 
@@ -11,7 +12,6 @@ server.sockets.on("connection", function(action) {
 
 
 var exit_room = function(data) {
-    console.error("Me llega al SERVER :: ", data);
     var room = ROOMS[data.room_id];
     var users = room.users;
     var new_users = [];
@@ -39,7 +39,10 @@ var enter_room = function(data) {
             instrument: data.instrument,
             color: data.color
         });
-        server.sockets.emit('start_in_room', {room: room});
+        server.sockets.emit('start_in_room', {
+            room: room,
+            user: data.username
+        });
         console.error(room);
     } else {
         _error_room_complete();
@@ -51,3 +54,5 @@ var enter_room = function(data) {
 var _error_room_complete = function() {
     console.error("La sala está llena !!");
 };
+
+
