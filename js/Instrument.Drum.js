@@ -11,7 +11,7 @@ Instrument.Drum = (function() {
     var _addPadsToBody = function() {
         var body, audio_html, pad_html, j, i;
         body = $$("#game-zone");
-        //body.html(' ');
+        body.html(' ');
         for(i in SOUNDS) {
             sound_ogg = SOUNDS[i];
             pad_html = "";
