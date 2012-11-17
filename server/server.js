@@ -5,6 +5,7 @@ var server = require("socket.io").listen(6969);
 var ROOMS = [];
 
 
+
 server.sockets.on("connection", function(action) {
     action.on('start', enter_room);
     action.on('exit_room', exit_room);
