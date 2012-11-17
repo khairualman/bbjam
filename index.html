@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>KitchenSink - Lungo 2.0</title>
+    <meta name="description" content="">
+    <meta name="author" content="Javier Jiménez Villar (@soyjavi)">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="cleartype" content="on">
+
+    <link rel="stylesheet" href="css/lungo.css">
+    <link rel="stylesheet" href="css/lungo.icon.brand.css">
+    <link rel="stylesheet" href="css/lungo.icon.css">
+    <link rel="stylesheet" href="css/lungo.theme.default.css">
+</head>
+
+<body class="app">
+
+    <section id="main" data-transition="slide">
+        <header class="">
+            <nav class="left box">
+                <a href="#features" data-router="aside" data-icon="menu"></a>
+            </nav>
+            <div class="left">
+                <div class="centered title with-subtitle">
+                    Lungo
+                    <small class="subtitle">HTML5 Cross-Device Framework</small>
+                </div>
+            </div>
+        </header>
+
+        <article id="main-article" class="list indented scroll">
+            <form>
+                <input type="text" value="" placeholder="introduce aquí tu nombre" required="true" />
+                <a href="#" id="start-button" class="button big red">Comenzar</a>
+            </form>
+        </article>
+    </section>
+
+
+    <section id="game" data-transition="slide">
+
+        <header class="">
+            <nav class="left box">
+                <a href="#back" data-router="back" data-icon="left"></a>
+            </nav>
+            <div class="left">
+                <div class="centered title with-subtitle">
+                    Lungo
+                    <small class="subtitle">HTML5 Cross-Device Framework</small>
+                </div>
+            </div>
+        </header>
+        <article id="main-article" class="list indented scroll">
+            el juego en si
+        </article>
+    </section>
+
+
+    <!-- Lungo dependencies -->
+    <script src="js/libs/quo.js"></script>
+    <script src="js/libs/lungo.js"></script>
+    <script src="js/libs/socket.io.js"></script>
+
+    <script src="js/events.js"></script>
+
+
+
+    <script>
+        Lungo.init({
+            name: 'JaM',
+            version: '1.0',
+            resources: []
+        });
+
+        var websocket = io.connect("http://192.168.18.118:6969");
+        var room_data = {};
+        var my_user = '';
+
+        $$(document).ready(function() {
+
+            $$("a[data-router=back]").tap(function() {
+                console.error('Voy a salir --> ', room_data);
+                websocket.emit('exit_room', {
+                    room_id: room_data.room_id,
+                    name: my_user
+                });
+            });
+
+            $$("#start-button").tap(function() {
+                var name = $$(this).siblings('input').val();
+                if(name != "") {
+                    my_user = name;
+                    websocket.emit('start', {
+                        room_id: '1',
+                        username: name,
+                        instrument: 'banjo',
+                        color: 'red'
+                    });
+                }
+            });
+
+        });
+
+        websocket.on('start_in_room', function(data) {
+            room_data = data.room;
+            console.error('Dentro del ROOM !!!!!', room_data);
+            Lungo.Router.section('#game');
+
+        });
+
+    </script>
+
+</body>
+</html>
